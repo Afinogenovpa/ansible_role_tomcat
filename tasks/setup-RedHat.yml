@@ -1,0 +1,6 @@
+---
+- name: Ensure Java is installed.
+  yum:
+    name: "{{ java_package }}"
+    state: present
+
