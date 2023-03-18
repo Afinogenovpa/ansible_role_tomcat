@@ -11,7 +11,7 @@ tomcat_version: "9.0.73" - setup this version
 
 #### JAVA setup
 ```
-tomcat_install_java: true - set true for setup java package from packet manager, it works on Debian,Arch,Redhat os
+tomcat_install_java: true - set true for setup java package from packet manager, it works on Debian,Arch,Redhat OS
 java_package: "openjdk-17-jdk" - Ubuntu 20.04.5 LTS example
 java_home: "" - if necessary
 ```
