@@ -1,6 +1,5 @@
 # [Tomcat ansible role](#Tomcat-ansible-role) 
-Install and configure apache Tomcat on your system.
-
+Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 
 ## [Role Variables](#role-variables)
 The default values for the variables are set in [`defaults/main.yml`](https://github.com/Afinogenovpa/Tomcat_install_ansible_role/blob/main/defaults/main.yml):
@@ -67,6 +66,8 @@ server:
 set_env:
  - 'JAVA_OPTS="-Xms512M -Xmx512M"'
 ```
-## [Author Information](#author-information)
+## [Tested on the following operating systems](#Tested) 
+- Ubuntu 20.04 / Ubuntu 18.04
 
+## [Author Information](#author-information)
 soon...
