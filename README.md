@@ -1,7 +1,7 @@
 # Tomcat ansible role
 
 
-**java must be installed before using this role**
+:warning:**java must be installed before using this role**
 
 ```
 tomcat_release: "9"
