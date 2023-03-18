@@ -1,6 +1,6 @@
 # Tomcat_install_ansible_role
 
-## java must be installed before using this role
+**java must be installed before using this role**
 
 tomcat_release: "9"
 tomcat_version: "9.0.73"
