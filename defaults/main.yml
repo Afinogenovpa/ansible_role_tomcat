@@ -1,8 +1,31 @@
 tomcat_release: "9"
 tomcat_version: "9.0.73"
+tomcat_url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_release }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz" 
+java_home: ""
 tomcat_user: tomcat
 tomcat_group: tomcat
 tomcat_install_dir: "/opt"
-java_home: ""
-force_tomcat_install: false
 clean_tomcat_downloaded: false
+force_tomcat_install: false
+
+tomcat_manager:
+  host_manager_allow: ".*"
+  manager_allow: ".*"
+  roles:
+  - rolename: "manager-gui"
+  users:
+  - username: "tomcat"
+    password: "tomcat"
+    roles: "manager-gui"
+
+server:
+  host: "localhost"
+  address: "0.0.0.0"
+  port: 8080
+  timeout: 20000
+  max_post_size: 209715200
+  redirect_port: 8443
+  auto_deployment: true 
+
+set_env:
+ - 'JAVA_OPTS="-Xms512M -Xmx512M"'
