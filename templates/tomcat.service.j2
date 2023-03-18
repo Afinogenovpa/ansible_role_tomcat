@@ -9,7 +9,7 @@ Group={{ tomcat_group }}
 Environment=CATALINA_PID={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/temp/tomcat.pid
 Environment=CATALINA_HOME={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}
 Environment=CATALINA_BASE={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}
-Environment=JAVA_HOME=
+Environment=JAVA_HOME={{ java_home | default("") }}
 ExecStart={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/startup.sh
 ExecStop={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/shutdown.sh
 Restart=on-failure

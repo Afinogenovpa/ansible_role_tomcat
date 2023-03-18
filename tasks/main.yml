@@ -1,4 +1,18 @@
 ---
+ Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+# Setup/install tasks.
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat' and tomcat_install_java
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian' and tomcat_install_java
+
+- include_tasks: setup-Archlinux.yml
+  when: ansible_os_family == 'Archlinux' and tomcat_install_java
+
 - name: Find previos versions Tomcat
   find:
     path: "{{ tomcat_install_dir }}"
@@ -26,7 +40,7 @@
 
 - name: Download Tomcat archive 
   get_url:
-    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_release }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
     dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
     mode: '0644'
   when: force_tomcat_install or not tomcat_installed.stat.exists or not tomcat_downloaded

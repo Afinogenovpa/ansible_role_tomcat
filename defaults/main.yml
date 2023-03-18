@@ -1,10 +1,12 @@
-tomcat_release: "9"
 tomcat_version: "9.0.73"
-tomcat_url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_release }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz" 
-java_home: ""
 tomcat_user: tomcat
 tomcat_group: tomcat
 tomcat_install_dir: "/opt"
+
+tomcat_install_java: true
+java_package: "openjdk-17-jdk"
+java_home: ""
+
 clean_tomcat_downloaded: false
 force_tomcat_install: false
 

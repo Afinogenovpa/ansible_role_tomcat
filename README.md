@@ -1,17 +1,19 @@
-# Tomcat ansible role
+# [Tomcat ansible role](#Tomcat ansible role) 
+Install and configure apache Tomcat on your system.
 
 
-:warning: **java must be installed before using this role** :warning:
+## [Role Variables](#role-variables)
+The default values for the variables are set in [`defaults/main.yml`](https://github.com/Afinogenovpa/Tomcat_install_ansible_role/blob/main/defaults/main.yml):
 
 ```
-tomcat_release: "9"
-tomcat_version: "9.0.73"
-tomcat_url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_release }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz" 
+tomcat_version: "9.0.73" - setup this version
 ```
 
-#### Write path JAVA_HOME
+#### JAVA setup
 ```
-java_home: ""
+tomcat_install_java: true - set true for setup java package from packet manager, it works on Debian,Arch,Redhat os
+java_package: "openjdk-17-jdk" - Ubuntu 20.04.5 LTS example
+java_home: "" - if necessary
 ```
 
 #### Creates user and group on server
@@ -35,12 +37,11 @@ clean_tomcat_downloaded: false
 force_tomcat_install: false
 ```
 
-
 #### "tomcat_manager", use to fill the config file tomcat-users.xml, not required to use
 ```
 tomcat_manager:
-  host_manager_allow: ".*" - by default it is "127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1"
-  manager_allow: ".*" - by default it is "127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1"
+  host_manager_allow: ".*" - by default it is "127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" - localhost
+  manager_allow: ".*" - by default it is "127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" - localhost
   roles:
   - rolename: "manager-gui"
   users:
@@ -66,4 +67,6 @@ server:
 set_env:
  - 'JAVA_OPTS="-Xms512M -Xmx512M"'
 ```
+## [Author Information](#author-information)
 
+soon...
