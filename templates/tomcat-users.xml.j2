@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% if tomcat_manager %}
+<tomcat-users>
+{% for tomcat_manager_role in tomcat_manager.roles %}
+  <role rolename="{{ tomcat_manager_role.rolename }}"/>
+{% endfor %}
+{% for tomcat_manager_user in tomcat_manager.users %}
+  <user username="{{ tomcat_manager_user.username }}" password="{{ tomcat_manager_user.password }}" roles="{{ tomcat_manager_user.roles }}"/>
+{% endfor %}
+</tomcat-users>
+{% endif %}
