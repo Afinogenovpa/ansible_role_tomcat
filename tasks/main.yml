@@ -1,0 +1,127 @@
+---
+- name: Find previos versions Tomcat
+  find:
+    path: "{{ tomcat_install_dir }}"
+    file_type: directory
+    patterns: '*apache-tomcat*'
+  register: tomcat_to_delete
+  when: force_tomcat_install
+
+- name: Delete previos versions Tomcat
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ tomcat_to_delete.files }}"
+  when: force_tomcat_install
+
+- name: check if Tomcat is installed.
+  stat: 
+    path='{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}'
+  register: tomcat_installed
+
+- name: Check if Tomcat is downloaded
+  stat: 
+    path: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+  register: tomcat_downloaded
+
+- name: Download Tomcat archive 
+  get_url:
+    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_release }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    mode: '0644'
+  when: force_tomcat_install or not tomcat_installed.stat.exists or not tomcat_downloaded
+
+- name: Create Tomcat user and group
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+  become: true
+
+- name: Create Tomcat user
+  user:
+    name: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    system: true
+    shell: /bin/false
+  become: true
+
+- name: Extract Tomcat binary from archive
+  become: true
+  unarchive:
+    src: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    dest: "{{ tomcat_install_dir }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+    remote_src: yes
+    creates: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+  when: force_tomcat_install or not tomcat_installed.stat.exists
+
+- name: Cleanup Tomcat archive
+  file:
+    path: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    state: absent
+  when: clean_tomcat_downloaded
+
+- name: Set Tomcat installation directory permissions
+  become: true
+  file:
+    path: "{{ tomcat_install_dir }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+    recurse: yes
+
+- name: Set Tomcat link directory
+  file:
+    src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+    dest: "{{ tomcat_install_dir }}/tomcat"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+    state: link
+
+- name: Create Tomcat systemd service file
+  become: true
+  template:
+    src: "tomcat.service.j2"
+    dest: "/etc/systemd/system/tomcat.service"
+    owner: root
+    group: root
+    mode: '0644'
+  register: tomcat_service_installed
+  notify:
+  - restart tomcat
+
+- name: Copy Tomcat config files
+  template: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+  loop:
+    - src: "tomcat-users.xml.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/tomcat-users.xml"
+    - src: "server.xml.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+    - src: "setenv.sh.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/setenv.sh"
+    - src: "manager-context.xml.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/manager/META-INF/context.xml"
+    - src: "host-manager-context.xml.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager/META-INF/context.xml"
+  notify:
+  - restart tomcat
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+  when: tomcat_service_installed.changed
+
+- name: Start and enable Tomcat service
+  become: true
+  systemd:
+    name: tomcat
+    state: started
+    enabled: yes

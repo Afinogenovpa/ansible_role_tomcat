@@ -1,0 +1,8 @@
+tomcat_release: "9"
+tomcat_version: "9.0.73"
+tomcat_user: tomcat
+tomcat_group: tomcat
+tomcat_install_dir: "/opt"
+java_home: ""
+force_tomcat_install: false
+clean_tomcat_downloaded: false

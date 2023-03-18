@@ -1,0 +1,19 @@
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User={{ tomcat_user }}
+Group={{ tomcat_group }}
+Environment=CATALINA_PID={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/temp/tomcat.pid
+Environment=CATALINA_HOME={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}
+Environment=CATALINA_BASE={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}
+Environment=JAVA_HOME=
+ExecStart={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/startup.sh
+ExecStop={{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/shutdown.sh
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
