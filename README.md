@@ -1,10 +1,9 @@
 ## [Tomcat ansible role](#tomcat-ansible-role) 
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
-links: 
-- [how to use](#how-to-use-this-role)
-- [role variables](#role-variables)
-- [tested on](#tested) 
-- [author](#author-information)
+- [How to use](#how-to-use-this-role)
+- [Role variables](#role-variables)
+- [Tested on](#tested) 
+- [Author](#author-information)
 
 ## [How to use this role](#how-to-use-this-role)
 - Clone the Project:
