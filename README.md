@@ -2,7 +2,7 @@
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 - [How to use](#how-to-use-this-role)
 - [Role variables](#role-variables)
-- [Tested on](#tested) 
+- [Tested on](#tested-on-the-following-systems)
 - [Author](#author-information)
 
 ## [How to use this role](#how-to-use-this-role)
@@ -122,7 +122,7 @@ server:
 set_env:
  - 'JAVA_OPTS="-Xms512M -Xmx512M"'
 ```
-## [Tested on the following operating systems](#tested) 
+## [Tested on the following operating systems](#tested-on-the-following-systems) 
 - Ubuntu 20.04 / Ubuntu 18.04
 
 ## [Author Information](#author-information)
