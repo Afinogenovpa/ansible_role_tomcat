@@ -40,7 +40,7 @@
 
 - name: Download Tomcat archive 
   get_url:
-    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version}}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
     dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
     mode: '0644'
   when: force_tomcat_install or not tomcat_installed.stat.exists or not tomcat_downloaded
