@@ -1,12 +1,12 @@
-## [Tomcat ansible role](#Tomcat-ansible-role) 
+## [Tomcat ansible role](#tomcat-ansible-role) 
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 links: 
-- [how to use](#How-to-use)
+- [how to use](#how-to-use)
 - [role variables](#role-variables)
-- [tested on](#Tested) 
+- [tested on](#tested) 
 - [author](#author-information)
 
-## [How to use this role](#How-to-use)
+## [How to use this role](#how-to-use)
 - Clone the Project:
 
 ```
@@ -123,7 +123,7 @@ server:
 set_env:
  - 'JAVA_OPTS="-Xms512M -Xmx512M"'
 ```
-## [Tested on the following operating systems](#Tested) 
+## [Tested on the following operating systems](#tested) 
 - Ubuntu 20.04 / Ubuntu 18.04
 
 ## [Author Information](#author-information)
