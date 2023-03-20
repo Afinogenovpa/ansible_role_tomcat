@@ -5,7 +5,7 @@
 - Clone the Project:
 
 ```
-$ git clone (https://github.com/Afinogenovpa/ansible_role_tomcat.git)
+$ git clone [https://github.com/Afinogenovpa/ansible_role_tomcat.git]
 $ cd ansible_role_tomcat/
 ```
 
