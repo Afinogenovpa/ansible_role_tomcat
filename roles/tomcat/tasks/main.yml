@@ -123,7 +123,7 @@
   notify:
   - restart tomcat
 
-  - name: Enable Tomcat manager
+- name: Enable Tomcat manager
   template: 
     src: "{{ item.src }}" 
     dest: "{{ item.dest }}"
