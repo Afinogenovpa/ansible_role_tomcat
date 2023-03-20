@@ -116,8 +116,6 @@
     group: "{{ tomcat_group }}"
     mode: '0755'
   loop:
-    - src: "tomcat-users.xml.j2"
-      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/tomcat-users.xml"
     - src: "server.xml.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
     - src: "setenv.sh.j2"
@@ -133,6 +131,8 @@
     group: "{{ tomcat_group }}"
     mode: '0755'
   loop:
+    - src: "tomcat-users.xml.j2"
+      dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/tomcat-users.xml"
     - src: "manager-context.xml.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/manager/META-INF/context.xml"
     - src: "host-manager-context.xml.j2"
