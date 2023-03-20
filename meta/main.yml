@@ -1,0 +1,29 @@
+---
+galaxy_info:
+  author: afinogenovpa
+  role_name: tomcat
+  description: Install and configure apache Tomcat on your system
+  company: none
+  min_ansible_version: "2.12"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+    - name: Debian
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: opensuse
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - tomcat
+
+dependencies: []
