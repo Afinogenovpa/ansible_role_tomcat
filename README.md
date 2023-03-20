@@ -13,6 +13,8 @@
 ```
 $ git clone https://github.com/Afinogenovpa/ansible_role_tomcat.git
 $ cd ansible_role_tomcat/
+$ mkdir -p role/tomcat
+$ mv defaults/ handlers/ meta/ tasks/ templates/ vars/ roles/tomcat/
 ```
 
 - Update your inventory:
