@@ -1,7 +1,9 @@
-## [Tomcat ansible role](#tomcat-ansible-role) 
+## [Tomcat ansible role](#tomcat-ansible-role) |[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tomcat.svg)](https://github.com/robertdebock/ansible-role-tomcat/releases/)|
+
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 - [How to use](#how-to-use-this-role)
 - [Role variables](#role-variables)
+- [How to run playbook](#running-playbook)
 - [Tested on](#tested-on-the-following-operating-systems) 
 - [Author](#author-information)
 
@@ -46,6 +48,16 @@ $ vim hosts
         - username: "tomcat"
           password: "tomcat"
           roles: "manager-gui"
+    server:                         # Delete this section if you don't need server custom opts
+      host: "localhost"
+      address: "0.0.0.0"
+      port: 8080
+      timeout: 20000
+      max_post_size: 209715200
+      redirect_port: 8443
+      auto_deployment: true 
+    set_env:                        # Delete this section if you don't need custom opts
+      - 'JAVA_OPTS="-Xms512M -Xmx512M"'
   roles:
     - tomcat
 ```
@@ -58,7 +70,7 @@ become_method: sudo
 ```
 
 ## [Role Variables](#role-variables)
-The default values for the variables are set in [`defaults/main.yml`](https://github.com/Afinogenovpa/Tomcat_install_ansible_role/blob/main/defaults/main.yml):
+The minimum of default values for the variables are set in [`defaults/main.yml`](https://github.com/Afinogenovpa/Tomcat_install_ansible_role/blob/main/defaults/main.yml):
 
 ```
 tomcat_version: "9.0.73" - setup this version
@@ -122,6 +134,13 @@ server:
 set_env:
  - 'JAVA_OPTS="-Xms512M -Xmx512M"'
 ```
+
+## [Running Playbook](#running-playbook)
+
+```
+ansible-playbook -i hosts.ini tomcat_playbook.yml
+```
+
 ## [Tested on the following operating systems](#tested-on-the-following-operating-systems) 
 - Ubuntu 20.04 / Ubuntu 18.04
 
