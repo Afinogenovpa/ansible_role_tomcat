@@ -13,4 +13,3 @@
     group: "{{ tomcat_group }}"
     mode: '0755'
     state: link
-    
