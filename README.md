@@ -1,7 +1,7 @@
 ## [Tomcat ansible role](#tomcat-ansible-role) 
 [![Version](https://img.shields.io/github/v/release/afinogenovpa/ansible_role_tomcat)](https://github.com/Afinogenovpa/ansible_role_tomcat/releases/)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-afinogenovpa.tomcat-green)](https://galaxy.ansible.com/afinogenovpa/tomcat)
-
+[![Quality Score](https://img.shields.io/badge/Quality%20-5-green)](https://galaxy.ansible.com/afinogenovpa/tomcat)
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 - [Installation](#installation)
 - [Role variables](#role-variables)
