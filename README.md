@@ -6,7 +6,7 @@ links:
 - [tested on](#tested) 
 - [author](#author-information)
 
-## [How to use this role](#how-to-use)
+## [How to use this role](#how-to-use-this-role)
 - Clone the Project:
 
 ```
