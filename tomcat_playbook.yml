@@ -1,6 +1,6 @@
-- name: Tomcat deployment playbook
+- name: Tomcat playbook
   hosts: tomcat_nodes       # Inventory hosts group / server to act on
-  connection: local
+  connection: local         # Delete if you need a non-local installation
   become: yes               # If to escalate privilege
   become_method: sudo       # Set become method
   remote_user: root         # Update username for remote server
@@ -13,7 +13,7 @@
     java_package: "openjdk-17-jdk"
     force_tomcat_install: false
     clean_tomcat_downloaded: false
-    tomcat_manager:
+    tomcat_manager:                 # Delete this section if you don't need tomcat manager, will be setup default values
       host_manager_allow: ".*"
       manager_allow: ".*"
       roles:
