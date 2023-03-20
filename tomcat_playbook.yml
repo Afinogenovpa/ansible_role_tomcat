@@ -1,0 +1,26 @@
+- name: Tomcat deployment playbook
+  hosts: tomcat_nodes       # Inventory hosts group / server to act on
+  connection: local
+  become: yes               # If to escalate privilege
+  become_method: sudo       # Set become method
+  remote_user: root         # Update username for remote server
+  vars:
+    tomcat_version: "9.0.73"
+    tomcat_user: tomcat
+    tomcat_group: tomcat
+    tomcat_install_dir: "/opt"
+    tomcat_install_java: true
+    java_package: "openjdk-17-jdk"
+    force_tomcat_install: false
+    clean_tomcat_downloaded: false
+    tomcat_manager:
+      host_manager_allow: ".*"
+      manager_allow: ".*"
+      roles:
+        - rolename: "manager-gui"
+      users:
+        - username: "tomcat"
+          password: "tomcat"
+          roles: "manager-gui"
+  roles:
+    - tomcat
