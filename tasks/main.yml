@@ -29,16 +29,16 @@
   when: force_tomcat_install
 
 - name: check if Tomcat is installed.
-  stat: 
+  stat:
     path='{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}'
   register: tomcat_installed
 
 - name: Check if Tomcat is downloaded
-  stat: 
+  stat:
     path: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
   register: tomcat_downloaded
 
-- name: Download Tomcat archive 
+- name: Download Tomcat archive
   get_url:
     url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
     dest: "/tmp/apache-tomcat-{{ tomcat_version }}.tar.gz"
@@ -109,8 +109,8 @@
   - restart tomcat
 
 - name: Copy Tomcat config files
-  template: 
-    src: "{{ item.src }}" 
+  template:
+    src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
@@ -124,8 +124,8 @@
   - restart tomcat
 
 - name: Enable Tomcat manager
-  template: 
-    src: "{{ item.src }}" 
+  template:
+    src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
@@ -137,7 +137,7 @@
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/manager/META-INF/context.xml"
     - src: "host-manager-context.xml.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager/META-INF/context.xml"
-  when: tomcat_manager
+  when: tomcat_manager is defined
 
 - name: Reload systemd
   command: systemctl daemon-reload
