@@ -1,4 +1,4 @@
-## [Tomcat ansible role](#tomcat-ansible-role) |[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-tomcat.svg)](https://github.com/robertdebock/ansible-role-tomcat/releases/)|
+## [Tomcat ansible role](#tomcat-ansible-role) [![Version](https://img.shields.io/github/v/release/afinogenovpa/ansible_role_tomcat)](https://github.com/Afinogenovpa/ansible_role_tomcat/releases/)
 
 > Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
 - [How to use](#how-to-use-this-role)
