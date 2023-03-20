@@ -4,3 +4,13 @@
   systemd:
     name: tomcat
     state: restarted
+
+- name: set tomcat link
+  file:
+    src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+    dest: "{{ tomcat_install_dir }}/tomcat"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+    state: link
+    
