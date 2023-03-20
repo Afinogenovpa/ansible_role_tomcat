@@ -1,5 +1,57 @@
-# [Tomcat ansible role](#Tomcat-ansible-role) 
-Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
+## [Tomcat ansible role](#Tomcat-ansible-role) 
+> Install and configure apache Tomcat on your system(RedHat, Arch, Debian Linux).
+
+## [How to use this role](#How-to-use)
+- Clone the Project:
+
+```
+$ git clone [`https://github.com/Afinogenovpa/ansible_role_tomcat.git`](https://github.com/Afinogenovpa/ansible_role_tomcat.git)
+$ cd ansible_role_tomcat/
+```
+
+- Update your inventory:
+```
+$ vim hosts
+[tomcat_nodes]
+127.0.0.1 - change if you need a non-local installation
+```
+
+- Update variables in playbook file 
+```
+- name: Tomcat playbook
+  hosts: tomcat_nodes       # Inventory hosts group / server to act on
+  connection: local         # Delete if you need a non-local installation
+  become: yes               # If to escalate privilege
+  become_method: sudo       # Set become method
+  remote_user: root         # Update username for remote server
+  vars:
+    tomcat_version: "9.0.73"
+    tomcat_user: tomcat
+    tomcat_group: tomcat
+    tomcat_install_dir: "/opt"
+    tomcat_install_java: true
+    java_package: "openjdk-17-jdk"
+    force_tomcat_install: false
+    clean_tomcat_downloaded: false
+    tomcat_manager:                 # Delete this section if you don't need tomcat manager, will be setup default values
+      host_manager_allow: ".*"
+      manager_allow: ".*"
+      roles:
+        - rolename: "manager-gui"
+      users:
+        - username: "tomcat"
+          password: "tomcat"
+          roles: "manager-gui"
+  roles:
+    - tomcat
+```
+
+If you are using non root remote user, then set username and enable sudo:
+
+```
+become: yes
+become_method: sudo
+```
 
 ## [Role Variables](#role-variables)
 The default values for the variables are set in [`defaults/main.yml`](https://github.com/Afinogenovpa/Tomcat_install_ansible_role/blob/main/defaults/main.yml):
