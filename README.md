@@ -156,7 +156,7 @@ ansible-playbook -i hosts.ini tomcat_playbook.yml
 - Ubuntu 20.04 / Ubuntu 18.04
 
 ## [License](#license)
-MIT License [https://github.com/cetic/ansible-role-tomcat8.5/blob/master/LICENSE](https://github.com/Afinogenovpa/ansible_role_tomcat/blob/main/LICENSE)
+MIT License [https://github.com/Afinogenovpa/ansible_role_tomcat/blob/main/LICENSE](https://github.com/Afinogenovpa/ansible_role_tomcat/blob/main/LICENSE)
 
 ## [Author Information](#author-information)
 soon...
