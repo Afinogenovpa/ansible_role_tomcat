@@ -1,3 +1,4 @@
+---
 - name: Tomcat playbook
   hosts: tomcat_nodes       # Inventory hosts group / server to act on
   connection: local         # Delete if you need a non-local installation
