@@ -140,7 +140,8 @@
   when: tomcat_manager is defined
 
 - name: Reload systemd
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: true
   when: tomcat_service_installed.changed
 
 - name: Start and enable Tomcat service
