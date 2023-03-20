@@ -87,15 +87,6 @@
     mode: '0755'
     recurse: yes
 
-- name: Set Tomcat link directory
-  file:
-    src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
-    dest: "{{ tomcat_install_dir }}/tomcat"
-    owner: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
-    mode: '0755'
-    state: link
-
 - name: Create Tomcat systemd service file
   become: true
   template:
@@ -107,6 +98,7 @@
   register: tomcat_service_installed
   notify:
     - restart tomcat
+    - set tomcat link
 
 - name: Copy Tomcat config files
   template:
