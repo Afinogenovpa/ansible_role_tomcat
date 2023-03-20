@@ -106,7 +106,7 @@
     mode: '0644'
   register: tomcat_service_installed
   notify:
-  - restart tomcat
+    - restart tomcat
 
 - name: Copy Tomcat config files
   template:
@@ -121,7 +121,7 @@
     - src: "setenv.sh.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/setenv.sh"
   notify:
-  - restart tomcat
+    - restart tomcat
 
 - name: Enable Tomcat manager
   template:
