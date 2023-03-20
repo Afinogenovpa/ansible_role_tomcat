@@ -122,12 +122,22 @@
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
     - src: "setenv.sh.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/bin/setenv.sh"
+  notify:
+  - restart tomcat
+
+  - name: Enable Tomcat manager
+  template: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+  loop:
     - src: "manager-context.xml.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/manager/META-INF/context.xml"
     - src: "host-manager-context.xml.j2"
       dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager/META-INF/context.xml"
-  notify:
-  - restart tomcat
+  when: tomcat_manager
 
 - name: Reload systemd
   command: systemctl daemon-reload
