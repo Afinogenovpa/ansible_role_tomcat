@@ -22,5 +22,15 @@
         - username: "tomcat"
           password: "tomcat"
           roles: "manager-gui"
+    server:                         # Delete this section if you don't need server custom opts
+      host: "localhost"
+      address: "0.0.0.0"
+      port: 8080
+      timeout: 20000
+      max_post_size: 209715200
+      redirect_port: 8443
+      auto_deployment: true 
+    set_env:                        # Delete this section if you don't need custom opts
+      - 'JAVA_OPTS="-Xms512M -Xmx512M"'
   roles:
     - tomcat
